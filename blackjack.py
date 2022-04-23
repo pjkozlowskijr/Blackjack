@@ -21,8 +21,7 @@ card_value = {
     "Queen": 10, 
     "King": 10,
 }
-
-class Card:
+class Card():
     def __init__(self, suit, card_name, card_value):
         self.suit = suit
         self.card_name = card_name
@@ -30,7 +29,7 @@ class Card:
 
 class Deck:
     def __init__(self):
-        self.deck = []
+        self.deck = [] 
         for suit in suits:
             for card in card_name:
                 self.deck.append(Card(suit, card, card_value[card]))
@@ -49,7 +48,10 @@ class Person:
         self.aces = 0
 
     def add_card(self, card):
-        pass
+        self.hand.append(card)
+        self.score += card_value[card.card_name]
+        if card_value == "A":
+            self.aces += 1
 
     def ace_adjust(self):
         if self.score > 21 and self.aces > 0:
@@ -75,4 +77,4 @@ class Blackjack:
             # Check for player blackjack.
             # If blackjack...player wins
             # If no blackjack: Do you want to hit or stand?"
-            pass
+            pass   
