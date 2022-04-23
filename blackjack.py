@@ -1,5 +1,6 @@
 import random
 import os
+from tkinter import Y
 
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
@@ -77,7 +78,47 @@ class Blackjack:
         print("\nDealer hand:\n<HIDDEN CARD>")
         for ind in range(1, len(self.dealer.hand)):
             print(f"{self.dealer.hand[ind].card_name} of {self.dealer.hand[ind].suit}")
+            
 
+    def show_all_cards(self):
+        print("\nYour hand:")
+        for ind in range(len(self.player.hand)):
+            print(f"{self.player.hand[ind].card_name} of {self.player.hand[ind].suit}")
+        print("Your score:", self.player.score)
+        print("\nDealer hand:")
+        for ind in range(len(self.dealer.hand)):
+            print(f"{self.dealer.hand[ind].card_name} of {self.dealer.hand[ind].suit}")
+        print("Dealer score:", self.dealer.score)
+
+    def compare_scores(self):
+        if self.dealer.score > self.player.score:
+            print("dealers wins\n you lose")
+        elif self.dealer.score == self.player.score:
+            print('its a push') 
+        else: 
+            print('player wins dealer loses')
+        play_again = Blackjack()
+        play_again.play_game()
+    
+    def check_dealer_score(self):
+        self.show_all_cards()
+        
+        if self.dealer.score <17:
+            self.dealer.add_card(self.deck.deal())
+            self.check_dealer_score()
+        elif self.dealer.score > 21:
+            self.dealer.ace_adjust()
+            if self.dealer.score > 21:
+                print('player wins')
+                play_again = Blackjack()
+                play_again.play_game()
+        else:
+            self.compare_scores() 
+            
+            
+        # play_again = Blackjack()
+        # play_again.play_game()
+        
     def play_game(self):
         action = input("Do you want to play a game of blackjack? Y/N ").strip().lower()
         if action == "y":
@@ -86,14 +127,17 @@ class Blackjack:
             self.player.add_card(self.deck.deal())
             self.dealer.add_card(self.deck.deal())
             self.show_cards()
+            if self.player.score == 21:
+                print("You have BLACKJACK!!! You win! Congrats!")
+                play_again = Blackjack()
+                play_again.play_game()
         elif action == "n":
             print("Have a great day.")
+            
         else:
             print("Invalid entry. Try again.")
             self.play_game()
 
-        if self.player.score == 21:
-            print("You have BLACKJACK!!! You win! Congrats!")
         
         while self.player.score < 21:
             hit_or_stay = input("Do you want to hit ['h'] or stay ['s']? ").strip().lower()
@@ -110,9 +154,12 @@ class Blackjack:
                         self.show_cards()
                         continue
             elif hit_or_stay == "s":
+                self.check_dealer_score()
                 break 
+                
             else:
                 print("Invalid entry. Try again.")
 
+            
 game = Blackjack()
 game.play_game()
