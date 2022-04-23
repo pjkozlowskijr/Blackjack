@@ -5,7 +5,7 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 suits = ["Spades \u2664", "Hearts \u2661", "Clubs \u2667", "Diamonds \2662"]
-card_name: ["A", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+card_name = ["A", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
 card_value = {
     "A": 11,
     "Two": 2,
@@ -21,50 +21,58 @@ card_value = {
     "Queen": 10, 
     "King": 10,
 }
-
-class Card:
-    def __init__(self, suit, card_name, card_value):
-        self.suit = suit
+class Card():
+    def __init__(self,card_name,card_value):
         self.card_name = card_name
         self.card_value = card_value
 
+    def __str__(self):
+        return self.rank + 'of' + self.suit
+
+
 class Deck:
     def __init__(self):
-        self.deck = []
+        self.deck = [] 
         for suit in suits:
-            for card in card_name:
-                self.deck.append(Card(suit, card, card_value[card]))
+            for card_name in card_name:
+                self.deck.append(Card(suit, card_name))
 
-class Dealer:
+    def __str__(self):
+        deck_comp = " "  
+        for card in self.deck:
+            deck_comp += "\n " + card.__str__()  
+        return "Your deck contains:" + deck_comp
+
+    def shuffle(self):
+        random.shuffle(self.deck)
+
+    def deal(self):
+        single_card = self.deck.pop()
+        return single_card
+
+class Person():
     def __init__(self):
-        self.dealer_hand = []
-        self.dealer_score = 0
+        self.hand=[]
+        self.score = 0
+        self.aces = 0
 
-    def add_card(self):
-        added_card = random.choice(Deck.deck)
-        self.dealer_hand.append(added_card)
-        self.dealer_score += added_card.card_value
+    def add_card(self, card):
+        self.hand.append(card)
+        self.score += card_value[card.card_name]
+        if card_value == "A":
+            self.aces+=1
 
-    def stand(self):
-        pass
-        
-class Player:
-    def __init__(self):
-        self.player_hand = []
-        self.player_score = 0
 
-    def hit(self):
+
+    def ace_adjust(self):
         pass
 
-    def stand(self):
-        pass
-
-class Blackjack:
+class BlackJack():
     def __init__(self):
         self.card = Card(Card.suit, Card.card)
         self.deck = Deck()
-        self.dealer = Dealer()
-        self.player = Player()
+        dealer = Person()
+        player = Person()
 
     def play_game(self):
         action = input("Do you want to play a game of blackjack? Y/N ").strip().lower()
@@ -77,4 +85,4 @@ class Blackjack:
             # Check for player blackjack.
             # If blackjack...player wins
             # If no blackjack: Do you want to hit or stand?"
-            pass
+            pass   
