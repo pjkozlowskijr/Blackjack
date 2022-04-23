@@ -5,9 +5,9 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 suits = ["Spades \u2664", "Hearts \u2661", "Clubs \u2667", "Diamonds \2662"]
-card_name = ["A", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+card_name = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
 card_value = {
-    "A": 11,
+    "Ace": 11,
     "Two": 2,
     "Three": 3,
     "Four": 4,
@@ -21,11 +21,15 @@ card_value = {
     "Queen": 10, 
     "King": 10,
 }
+
 class Card():
     def __init__(self, suit, card_name, card_value):
         self.suit = suit
         self.card_name = card_name
         self.card_value = card_value
+
+    def __str__(self):
+        return self.card_name + " of " + self.suit
 
 class Deck:
     def __init__(self):
@@ -50,7 +54,7 @@ class Person:
     def add_card(self, card):
         self.hand.append(card)
         self.score += card_value[card.card_name]
-        if card_value == "A":
+        if card.card_name == "Ace":
             self.aces += 1
 
     def ace_adjust(self):
@@ -60,21 +64,55 @@ class Person:
 
 class Blackjack:
     def __init__(self):
-        self.card = Card(Card.suit, Card.card)
         self.deck = Deck()
-        Deck.shuffle()
-        dealer = Person()
-        player = Person()
-        
+        self.deck.shuffle()
+        self.dealer = Person()
+        self.player = Person()
+    
+    def show_cards(self):
+        print("\nYour hand:")
+        for ind in range(len(self.player.hand)):
+            print(f"{self.player.hand[ind].card_name} of {self.player.hand[ind].suit}")
+        print("Your score:", self.player.score)
+        print("\nDealer hand:\n<HIDDEN CARD>")
+        for ind in range(1, len(self.dealer.hand)):
+            print(f"{self.dealer.hand[ind].card_name} of {self.dealer.hand[ind].suit}")
+
     def play_game(self):
         action = input("Do you want to play a game of blackjack? Y/N ").strip().lower()
         if action == "y":
-            # Add card player
-            # Add card dealer
-            # Add card player
-            # Add card dealer
-            # Print "You have x & y in your hand. Your total is z." 
-            # Check for player blackjack.
-            # If blackjack...player wins
-            # If no blackjack: Do you want to hit or stand?"
-            pass   
+            self.player.add_card(self.deck.deal())
+            self.dealer.add_card(self.deck.deal())
+            self.player.add_card(self.deck.deal())
+            self.dealer.add_card(self.deck.deal())
+            self.show_cards()
+        elif action == "n":
+            print("Have a great day.")
+        else:
+            print("Invalid entry. Try again.")
+            self.play_game()
+
+        if self.player.score == 21:
+            print("You have BLACKJACK!!! You win! Congrats!")
+        
+        while self.player.score < 21:
+            hit_or_stay = input("Do you want to hit ['h'] or stay ['s']? ").strip().lower()
+            if hit_or_stay == "h":
+                self.player.add_card(self.deck.deal())
+                self.show_cards()
+                if self.player.score > 21:
+                    self.player.ace_adjust()
+                    if self.player.score > 21:
+                        print("You busted! Try again.")
+                        play_again = Blackjack()
+                        play_again.play_game()
+                    else:
+                        self.show_cards()
+                        continue
+            elif hit_or_stay == "s":
+                break 
+            else:
+                print("Invalid entry. Try again.")
+
+game = Blackjack()
+game.play_game()
