@@ -1,11 +1,10 @@
 import random
 import os
-from tkinter import Y
 
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
-suits = ["Spades \u2664", "Hearts \u2661", "Clubs \u2667", "Diamonds \2662"]
+suits = ["Spades \u2664", "Hearts \u2661", "Clubs \u2667", "Diamonds \u2662"]
 card_name = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
 card_value = {
     "Ace": 11,
@@ -70,6 +69,12 @@ class Blackjack:
         self.dealer = Person()
         self.player = Person()
     
+    def play_again(self):
+        again = input("\nDo you want to play again? Y/N ").strip().lower()
+        if again == "y":
+            new_hand = Blackjack()
+            new_hand.play_game()
+
     def show_cards(self):
         print("\nYour hand:")
         for ind in range(len(self.player.hand)):
@@ -79,7 +84,6 @@ class Blackjack:
         for ind in range(1, len(self.dealer.hand)):
             print(f"{self.dealer.hand[ind].card_name} of {self.dealer.hand[ind].suit}")
             
-
     def show_all_cards(self):
         print("\nYour hand:")
         for ind in range(len(self.player.hand)):
@@ -92,74 +96,75 @@ class Blackjack:
 
     def compare_scores(self):
         if self.dealer.score > self.player.score:
-            print("dealers wins\n you lose")
+            print("\nDealer wins. You lose. Better luck next time.")
+            self.play_again()
         elif self.dealer.score == self.player.score:
-            print('its a push') 
+            print("\nIt's a push. No one wins.")
+            self.play_again()
         else: 
-            print('player wins dealer loses')
-        play_again = Blackjack()
-        play_again.play_game()
+            print("\nYou win! Congrats!")
+            self.play_again()
     
     def check_dealer_score(self):
         self.show_all_cards()
-        
-        if self.dealer.score <17:
+        if self.dealer.score < 17:
+            print("\nDealer takes card since score under 17.")
             self.dealer.add_card(self.deck.deal())
             self.check_dealer_score()
         elif self.dealer.score > 21:
             self.dealer.ace_adjust()
             if self.dealer.score > 21:
-                print('player wins')
-                play_again = Blackjack()
-                play_again.play_game()
+                print("\nDealer busts! You win! Congrats!")
+                self.play_again()
+            else:
+                print("\nDealer Ace was adjusted from 11 points to 1 point, taking total score back under 21.")
+                self.check_dealer_score()
         else:
-            self.compare_scores() 
-            
-            
-        # play_again = Blackjack()
-        # play_again.play_game()
-        
-    def play_game(self):
-        action = input("Do you want to play a game of blackjack? Y/N ").strip().lower()
-        if action == "y":
-            self.player.add_card(self.deck.deal())
-            self.dealer.add_card(self.deck.deal())
-            self.player.add_card(self.deck.deal())
-            self.dealer.add_card(self.deck.deal())
-            self.show_cards()
-            if self.player.score == 21:
-                print("You have BLACKJACK!!! You win! Congrats!")
-                play_again = Blackjack()
-                play_again.play_game()
-        elif action == "n":
-            print("Have a great day.")
-            
-        else:
-            print("Invalid entry. Try again.")
-            self.play_game()
+            self.compare_scores()
 
-        
+    def check_player_score(self):
         while self.player.score < 21:
-            hit_or_stay = input("Do you want to hit ['h'] or stay ['s']? ").strip().lower()
+            hit_or_stay = input("\nDo you want to hit ['h'] or stay ['s']? ").strip().lower()
             if hit_or_stay == "h":
+                clear_screen()
                 self.player.add_card(self.deck.deal())
                 self.show_cards()
                 if self.player.score > 21:
                     self.player.ace_adjust()
                     if self.player.score > 21:
-                        print("You busted! Try again.")
-                        play_again = Blackjack()
-                        play_again.play_game()
+                        print("\nYou busted! Try again.")
+                        self.play_again()
                     else:
+                        print("\nYour Ace was adjusted from 11 points to 1 point, taking total score back under 21.")
                         self.show_cards()
                         continue
             elif hit_or_stay == "s":
-                self.check_dealer_score()
-                break 
-                
+                clear_screen()
+                break  
             else:
                 print("Invalid entry. Try again.")
 
-            
-game = Blackjack()
-game.play_game()
+    def start_game(self):
+        clear_screen()
+        print("Welcome to Patrick and Kyle's blackjack table. Good luck!")
+        self.player.add_card(self.deck.deal())
+        self.dealer.add_card(self.deck.deal())
+        self.player.add_card(self.deck.deal())
+        self.dealer.add_card(self.deck.deal())
+        self.player.ace_adjust()
+        self.show_cards()
+        if self.player.score == 21:
+            print("\nYou have BLACKJACK!!! You win! Congrats!")
+            self.play_again()
+        
+    def play_game(self):
+        self.start_game()
+        self.check_player_score()
+        self.check_dealer_score()
+
+def main():
+    game = Blackjack()
+    game.play_game()
+
+if __name__ == "__main__":
+    main()
