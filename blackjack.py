@@ -22,7 +22,7 @@ card_value = {
     "King": 10,
 }
 
-class Card:
+class Card():
     def __init__(self, suit, card_name, card_value):
         self.suit = suit
         self.card_name = card_name
@@ -34,11 +34,14 @@ class Deck:
         for suit in suits:
             for card in card_name:
                 self.deck.append(Card(suit, card, card_value[card]))
+                
+    def shuffle(self):
+        random.shuffle(self.deck)
 
-class Dealer:
-    def __init__(self):
-        self.dealer_hand = []
-        self.dealer_score = 0
+    def deal(self):
+        dealt_card = self.deck.pop()
+        return dealt_card
+
 
     def add_card(self):
         added_card = random.choice(Deck.deck)
@@ -47,25 +50,32 @@ class Dealer:
 
     def stand(self):
         pass
-        
-class Player:
+      
+class Person:
     def __init__(self):
-        self.player_hand = []
-        self.player_score = 0
+        self.hand = []
+        self.score = 0
+        self.aces = 0
 
-    def hit(self):
-        pass
+    def add_card(self, card):
+        self.hand.append(card)
+        self.score += card_value[card.card_name]
+        if card_value == "A":
+            self.aces += 1
 
-    def stand(self):
-        pass
+    def ace_adjust(self):
+        if self.score > 21 and self.aces > 0:
+            self.score -= 10
+            self.aces -= 1
 
 class Blackjack:
     def __init__(self):
         self.card = Card(Card.suit, Card.card)
         self.deck = Deck()
-        self.dealer = Dealer()
-        self.player = Player()
-
+        Deck.shuffle()
+        dealer = Person()
+        player = Person()
+        
     def play_game(self):
         action = input("Do you want to play a game of blackjack? Y/N ").strip().lower()
         if action == "y":
