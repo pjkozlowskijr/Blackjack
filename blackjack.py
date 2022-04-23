@@ -5,7 +5,7 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 suits = ["Spades \u2664", "Hearts \u2661", "Clubs \u2667", "Diamonds \2662"]
-card_name: ["A", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+card_name = ["A", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
 card_value = {
     "A": 11,
     "Two": 2,
@@ -34,38 +34,36 @@ class Deck:
         for suit in suits:
             for card in card_name:
                 self.deck.append(Card(suit, card, card_value[card]))
+    
+    def shuffle(self):
+        random.shuffle(self.deck)
 
-class Dealer:
+    def deal(self):
+        dealt_card = self.deck.pop()
+        return dealt_card
+
+class Person:
     def __init__(self):
-        self.dealer_hand = []
-        self.dealer_score = 0
+        self.hand = []
+        self.score = 0
+        self.aces = 0
 
-    def add_card(self):
-        added_card = random.choice(Deck.deck)
-        self.dealer_hand.append(added_card)
-        self.dealer_score += added_card.card_value
-
-    def stand(self):
-        pass
-        
-class Player:
-    def __init__(self):
-        self.player_hand = []
-        self.player_score = 0
-
-    def hit(self):
+    def add_card(self, card):
         pass
 
-    def stand(self):
-        pass
+    def ace_adjust(self):
+        if self.score > 21 and self.aces > 0:
+            self.score -= 10
+            self.aces -= 1
 
 class Blackjack:
     def __init__(self):
         self.card = Card(Card.suit, Card.card)
         self.deck = Deck()
-        self.dealer = Dealer()
-        self.player = Player()
-
+        Deck.shuffle()
+        dealer = Person()
+        player = Person()
+        
     def play_game(self):
         action = input("Do you want to play a game of blackjack? Y/N ").strip().lower()
         if action == "y":
