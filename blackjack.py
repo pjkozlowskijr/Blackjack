@@ -156,7 +156,7 @@ class Blackjack:
         if self.player.score == 21:
             print("\nYou have BLACKJACK!!! You win! Congrats!")
             self.play_again()
-        
+
     def play_game(self):
         self.start_game()
         self.check_player_score()
