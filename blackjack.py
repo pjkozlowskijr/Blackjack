@@ -44,6 +44,46 @@ class Deck:
     def deal(self):
         dealt_card = self.deck.pop()
         return dealt_card
+class Betting():
+    def __init__(self):
+        self.bank = 100
+        self.wager = 0
+    def placebet(self):
+        wager = int(input(f'How much would you like to wager? Your current bank is: {self.bank} dollars '))
+        if type(wager) == int:
+            self.wager = wager
+            print(f'This is where the fun begins, let us see what we can do with the {self.wager} dollars you risked')
+
+            if wager > self.bank:
+                print(f"You currently only have {self.bank} dollars in your bank. Stop being broke and get more money if you wanna bet that much.")
+
+                    
+        else:
+            print('Invalid number, please enter only digits')
+       
+
+
+    def losingbet(self):
+        self.bank = self.bank - self.wager
+        if self.bank == 0:
+            print(f"You're broke, your bank is {self.bank} dollars.")
+            borrow_money = input("Would you like to borrow $100 from a loan shark? Please respond with 'yes' or 'no' ")
+            if borrow_money.lower() == 'yes':
+                new_game = Blackjack()
+                new_game.play_game()
+            elif borrow_money.lower() == 'no':
+                clear_screen()
+                print('Thanks for playing')
+            else:
+                print('invalid response, please try again')
+
+
+
+    def winningbet(self):
+        print(self.wager)
+        self.bank = self.bank+self.wager
+
+
 
 class Person:
     def __init__(self):
@@ -68,6 +108,7 @@ class Blackjack:
         self.deck.shuffle()
         self.dealer = Person()
         self.player = Person()
+        self.betting = Betting()
 
     def show_cards(self):
         print("\nYour hand:")
@@ -91,12 +132,14 @@ class Blackjack:
     def compare_scores(self):
         if self.dealer.score > self.player.score:
             print("\nDealer wins. You lose. Better luck next time.")
+            self.betting.losingbet()
             self.play_again()
         elif self.dealer.score == self.player.score:
             print("\nIt's a push. No one wins.")
             self.play_again()
         else: 
             print("\nYou win! Congrats!")
+            self.betting.winningbet()
             self.play_again()
     
     def check_dealer_score(self):
@@ -109,6 +152,7 @@ class Blackjack:
             self.dealer.ace_adjust()
             if self.dealer.score > 21:
                 print("\nDealer busts! You win! Congrats!")
+                self.betting.winningbet()
                 self.play_again()
             else:
                 print("\nDealer Ace was adjusted from 11 points to 1 point, taking total score back under 21.")
@@ -127,7 +171,9 @@ class Blackjack:
                     self.player.ace_adjust()
                     if self.player.score > 21:
                         print("\nYou busted! Try again.")
+                        self.betting.losingbet()
                         self.play_again()
+                        
                     else:
                         print("\nYour Ace was adjusted from 11 points to 1 point, taking total score back under 21.")
                         self.show_cards()
@@ -141,6 +187,7 @@ class Blackjack:
     def start_game(self):
         clear_screen()
         print("Welcome to Patrick and Kyle's blackjack table. Good luck!")
+        self.betting.placebet()
         self.player.add_card(self.deck.deal())
         self.dealer.add_card(self.deck.deal())
         self.player.add_card(self.deck.deal())
@@ -149,7 +196,9 @@ class Blackjack:
         self.show_cards()
         if self.player.score == 21:
             print("\nYou have BLACKJACK!!! You win! Congrats!")
+            self.betting.winningbet()
             self.play_again()
+            
 
     def play_game(self):
         self.start_game()
