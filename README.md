@@ -4,10 +4,7 @@
 
 ## About This Project
 
-The goal of this project is to create a blackjack game from scratch that is run   
-in Python. We did not have to include functionality for betting, doubling down,   
-splitting cards, or insurance. We chose to include the function for betting to   
-make the game a little more fun. Good luck! We hope you enjoy our game!
+The goal of this project is to create a blackjack game from scratch that is run in Python. We did not have to include functionality for betting, doubling down, splitting cards, or insurance. We chose to include the function for betting to make the game a little more fun. Good luck! We hope you enjoy our game!
 
 ## How to Use Our Game
 
@@ -41,6 +38,5 @@ make the game a little more fun. Good luck! We hope you enjoy our game!
 
 ### Collaborative Items
 
-- We met for two to three hours prior to beginning the code to map out how we would   
-attack the project.
+- We met for two to three hours prior to beginning the code to map out how we would attack the project.
 - 
