@@ -68,12 +68,6 @@ class Blackjack:
         self.deck.shuffle()
         self.dealer = Person()
         self.player = Person()
-    
-    def play_again(self):
-        again = input("\nDo you want to play again? Y/N ").strip().lower()
-        if again == "y":
-            new_hand = Blackjack()
-            new_hand.play_game()
 
     def show_cards(self):
         print("\nYour hand:")
@@ -161,6 +155,15 @@ class Blackjack:
         self.start_game()
         self.check_player_score()
         self.check_dealer_score()
+
+    def play_again(self):
+        again = input("\nDo you want to play again? Y/N ").strip().lower()
+        if again == "y":
+            self.deck = Deck()
+            self.deck.shuffle()
+            self.dealer = Person()
+            self.player = Person()
+            self.play_game()
 
 def main():
     game = Blackjack()
