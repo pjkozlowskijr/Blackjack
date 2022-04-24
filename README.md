@@ -1,6 +1,6 @@
 # Blackjack Project - Patrick & Kyle
 
-![Blackjack image stolen from Google](https://thekatynews.com/wp-content/uploads/2020/10/Black-Jack-1024x576.png)
+![Blackjack image stolen from Google](https://thekatynews.com/wp-content/uploads/2020/10/Black-Jack-1024x576.png =100x)
 
 ## About This Project
 
