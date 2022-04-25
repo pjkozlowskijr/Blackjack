@@ -1,4 +1,4 @@
-# &hearts &diams &spades &clubs Blackjack Project - Patrick & Kyle
+# ♦️♠️♥️♣️ Blackjack Project - Patrick & Kyle ♦️♠️♥️♣️
 
 <img src=https://thekatynews.com/wp-content/uploads/2020/10/Black-Jack-1024x576.png height="250">
 
