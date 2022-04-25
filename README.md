@@ -8,8 +8,9 @@ The goal of this project is to create a blackjack game from scratch that is run 
 
 ## Run Instructions
 
-1. `git clone https://github.com/pjkozlowskijr/blackjack`
-2. `python blackjack.py`
+1. Clone this repository: `git clone https://github.com/pjkozlowskijr/blackjack`
+2. Open your terminal and navigate to the folder containing this repository.
+3. `python blackjack.py`
 
 ## Skills Used
 
@@ -23,13 +24,16 @@ The goal of this project is to create a blackjack game from scratch that is run 
 
 ## Team Members & Responsibility
 
-We met for two to three hours prior to beginning the code to map out how we would attack the project. In addition, we spent the majority of our time coding on a video call together to work through problems. While we were each responsible for specific items listed below, this was a team effort, and we helped each other troubleshoot our respective sections.
+We met for two to three hours prior to beginning the code to map out how we would attack the project. In addition, we spent the majority of our time coding on a video call together to work through problems. While we were each responsible for specific items listed below, this was a team effort, and we helped each other troubleshoot our respective sections. 
 
 ### Patrick Kozlowski
 
-- Create initial Github repository.
+- Create initial Github repository
 - Create template for README.md file.
-- 
+- Welcome and help functionality
+- Quitting the game at all stages
+- Showing the cards
+- Hit and stay process for the player
 
 ### Kyle Largent
 
@@ -38,3 +42,9 @@ We met for two to three hours prior to beginning the code to map out how we woul
 - 
 - 
 - 
+
+### Collaborated Items
+- Structure of classes
+- Creating the card and deck
+- Initializing start of game
+- Playing another hand
