@@ -1,4 +1,4 @@
-# Blackjack Project - Patrick & Kyle
+# \u2664 \u2661 \u2667 \u2662 Blackjack Project - Patrick & Kyle
 
 <img src=https://thekatynews.com/wp-content/uploads/2020/10/Black-Jack-1024x576.png height="250">
 
@@ -22,6 +22,8 @@ The goal of this project is to create a blackjack game from scratch that is run 
 
 ## Team Members & Responsibility
 
+We met for two to three hours prior to beginning the code to map out how we would attack the project. In addition, we spent the majority of our time coding on a video call together to work through problems. While we were each responsible for specific items listed below, this was a team effort, and we helped each other troubleshoot our respective sections.
+
 ### Patrick Kozlowski
 
 - Create initial Github repository.
@@ -34,9 +36,4 @@ The goal of this project is to create a blackjack game from scratch that is run 
 - 
 - 
 - 
-- 
-
-### Collaborative Items
-
-- We met for two to three hours prior to beginning the code to map out how we would attack the project.
 - 
