@@ -1,4 +1,4 @@
-# ♦️♠️♥️♣️ Blackjack Project - Patrick & Kyle ♦️♠️♥️♣️
+# Blackjack Project - Patrick & Kyle ♦️♠️♥️♣️
 
 <img src=https://thekatynews.com/wp-content/uploads/2020/10/Black-Jack-1024x576.png height="250">
 
@@ -6,9 +6,10 @@
 
 The goal of this project is to create a blackjack game from scratch that is run in Python. We did not have to include functionality for betting, doubling down, splitting cards, or insurance. We chose to include the function for betting to make the game a little more fun. Good luck! We hope you enjoy our game!
 
-## How to Use Our Game
+## Run Instructions
 
-
+1. `git clone https://github.com/pjkozlowskijr/blackjack`
+2. `python blackjack.py`
 
 ## Skills Used
 

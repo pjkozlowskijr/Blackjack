@@ -49,17 +49,19 @@ class Betting():
         self.borrow_money = ""
 
     def placebet(self):
-        clear_screen()
-        wager = int(input(f"Your current bank is: ${self.bank}. How much would you like to wager? "))
-        if type(wager) == int:
+        wager = input(f"\nYour current bank is: ${self.bank}. How much would you like to wager? ")
+        if type(wager) == int and wager > 0:
             self.wager = wager
+            clear_screen
             print(f"\nThis is where the fun begins. Let's see what you can do with the ${self.wager} you risked.")
             if wager > self.bank:
                 print(f"You only have ${self.bank} in your bank. Stop being broke and get more money if you wanna bet that much.")
         elif wager == "quit":
-            Blackjack().goodbye()
+            self.wager = "quit"
         else:
-            print("Invalid entry. Please enter only whole numbers as digits.")
+            clear_screen()
+            print("\nInvalid entry. Please enter only whole numbers as digits.")
+            self.placebet()
        
     def losingbet(self):
         self.bank = self.bank - self.wager
@@ -149,8 +151,10 @@ class Blackjack:
         self.playing = True
         if self.playing == True:
             self.betting.placebet()
-        if self.playing == True:
+        if self.playing == True and self.betting.wager != "quit":
             self.start_game()
+        else:
+            self.goodbye()
         if self.playing == True:
             self.show_cards()
         if self.playing == True:
