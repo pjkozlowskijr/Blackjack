@@ -10,7 +10,7 @@ The goal of this project is to create a blackjack game from scratch that is run 
 
 1. Clone this repository: `git clone https://github.com/pjkozlowskijr/blackjack`
 2. Open your terminal and navigate to the folder containing this repository.
-3. `python blackjack.py`
+3. Enter: `python blackjack.py`
 
 ## Skills Used
 
