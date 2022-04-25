@@ -37,11 +37,10 @@ We met for two to three hours prior to beginning the code to map out how we woul
 
 ### Kyle Largent
 
-- 
-- 
-- 
-- 
-- 
+- Created the betting system
+- Created the add card definition
+- Assisted in the structure for the Game to work
+- Worked with Patrick in accordance with our meetings and ideas to achieve mission accomplishment
 
 ### Collaborated Items
 - Structure of classes
