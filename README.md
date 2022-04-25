@@ -1,6 +1,6 @@
 # Blackjack Project - Patrick & Kyle ♦️♠️♥️♣️
 
-<img https://y.yarn.co/4d52aa05-5841-4929-a2e7-67bdbde3b316_text.gif height="250">
+<img src="https://y.yarn.co/4d52aa05-5841-4929-a2e7-67bdbde3b316_text.gif" height="250">
 
 ## About This Project
 
