@@ -1,4 +1,4 @@
-# \u2664 \u2661 \u2667 \u2662 Blackjack Project - Patrick & Kyle
+# &hearts &diams &spades &clubs Blackjack Project - Patrick & Kyle
 
 <img src=https://thekatynews.com/wp-content/uploads/2020/10/Black-Jack-1024x576.png height="250">
 
