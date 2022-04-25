@@ -49,6 +49,7 @@ class Betting():
         self.borrow_money = ""
 
     def placebet(self):
+        clear_screen()
         wager = input(f"Your current bank is: ${self.bank}. How much would you like to wager? ")
         if int(wager) > 0:
             self.wager = int(wager)
@@ -194,10 +195,13 @@ class Blackjack:
                     if self.player.score > 21:
                         self.player.ace_adjust()
                         if self.player.score > 21:
-                            print("You busted!")
+                            print("\nYou busted!")
                             self.playing = False
                             self.betting.losingbet()
-                            self.play_again()
+                            if self.betting.borrow_money != "n" and self.betting.borrow_money != "quit":
+                                self.play_again()
+                            else:
+                                self.goodbye()
                         else:
                             print("\nYour Ace was adjusted from 11 points to 1 point, taking total score back under 21.")
                             self.show_cards()
@@ -208,7 +212,7 @@ class Blackjack:
                 elif hit_or_stay == "quit":
                     self.playing = False
                     clear_screen()
-                    print(f"Thank you for playing! You're walking away with ${self.betting.bank}. Come again soon!")
+                    print(f"Thank you for playing! You\'re walking away with ${self.betting.bank}. Come again soon!")
                 else:
                     print("Invalid entry. Try again.")
 
@@ -278,7 +282,7 @@ class Blackjack:
     def goodbye(self):
         self.playing = False
         clear_screen()
-        print(f"Thank you for playing! You\'re walking away with ${self.betting.bank} Come again soon!")
+        print(f"Thank you for playing! You\'re walking away with ${self.betting.bank}. Come again soon!")
 
 def main():
     clear_screen()
